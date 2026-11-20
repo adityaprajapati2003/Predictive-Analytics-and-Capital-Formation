@@ -1,0 +1,15 @@
+# Single source of truth for the fundability label. The paper, the labels and the
+# platform should all read from this file.
+event: qualifying_external_equity_round
+horizon_months: 12
+prediction_date_rule: "snapshot date; features may only use information on or before it"
+qualifying_round_types: [pre_seed, seed, series_a, series_b]
+exclude_round_types: [grant, debt, bridge_note]
+label_values:
+  1: funded within horizon
+  0: observed through horizon, no qualifying round, coverage adequate
+  null: censored or unknown (excluded from training, reported separately)
+censoring:
+  - observation window ends before the horizon closes
+  - startup not covered by the data source
+  - startup known to have raised privately (undisclosed)

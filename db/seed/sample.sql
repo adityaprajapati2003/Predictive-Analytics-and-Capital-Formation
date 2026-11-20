@@ -1,0 +1,1 @@
+-- Synthetic demo rows only. Never commit real personal data.

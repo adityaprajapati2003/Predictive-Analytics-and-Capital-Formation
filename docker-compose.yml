@@ -1,0 +1,30 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports: ["5432:5432"]
+  redis:
+    image: redis:7
+  backend:
+    build: ./backend
+    env_file: .env
+    depends_on: [db, redis]
+    ports: ["8000:8000"]
+    volumes:
+      - ./models:/models
+  worker:
+    build: ./backend
+    command: celery -A app.workers.celery_app.celery_app worker --loglevel=info
+    env_file: .env
+    depends_on: [db, redis]
+    volumes:
+      - ./models:/models
+  frontend:
+    build: ./frontend
+    ports: ["5173:5173"]
+    depends_on: [backend]
+volumes:
+  pgdata:

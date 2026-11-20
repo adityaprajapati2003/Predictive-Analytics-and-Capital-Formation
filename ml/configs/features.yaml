@@ -1,0 +1,22 @@
+# Every feature keeps its provenance (unit, period, source, collected_on, verified).
+founder:
+  - prior_ventures
+  - domain_experience_years
+  - accelerator_participation
+  - team_size
+traction:
+  - revenue_growth
+  - burn_rate
+  - runway_months
+  - customer_growth
+subsector_specific:
+  payments: [transaction_volume, take_rate]
+  lending: [delinquency_rate, loss_rate]
+market:
+  - repo_rate
+  - cpi_inflation
+  - sector_funding_trend
+fairness_audit_only:   # never used as model inputs
+  - founder_gender
+  - founder_age_band
+  - founder_region
